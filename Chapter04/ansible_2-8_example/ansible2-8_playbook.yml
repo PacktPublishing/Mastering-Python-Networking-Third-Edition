@@ -1,0 +1,12 @@
+---
+- name: Chapter 4 Ansible 2.8 Best Practice Demonstration
+  connection: network_cli
+  gather_facts: false
+  hosts: all
+  tasks:
+    - name: backup
+      ios_config:
+        backup: yes
+      register: backup_ios_location
+      when: ansible_network_os == 'ios'
+
