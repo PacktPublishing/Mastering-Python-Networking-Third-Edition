@@ -1,0 +1,10 @@
+---
+ansible_host: 192.168.2.114
+ansible_user: arista
+ansible_password: arista
+ansible_connection: network_cli
+ansible_network_os: eos
+ansbile_become: yes
+ansible_become_method: enable
+ansible_become_pass: arista
+

@@ -1,0 +1,15 @@
+---
+- name: Echo Loop Items
+  hosts: "localhost"
+  gather_facts: false
+
+  tasks:
+    - name: echo loop items
+      command: echo "{{ item }}"
+      with_items:
+        - 'r1'
+        - 'r2'
+        - 'r3'
+        - 'r4'
+        - 'r5'
+

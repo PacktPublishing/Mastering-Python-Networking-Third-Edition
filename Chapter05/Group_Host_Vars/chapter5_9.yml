@@ -1,0 +1,10 @@
+---
+- name: Ansible Group and Host Varibles
+  hosts: localhost
+
+  tasks:
+    - name: create router configuration files
+      template: 
+        src=/home/echou/Mastering_Python_Networking_third_edition/Chapter05/Group_Host_Vars/nxos.j2
+        dest=/home/echou/Mastering_Python_Networking_third_edition/Chapter05/Group_Host_Vars/{{ item.key }}.conf
+      with_dict: "{{ nexus_devices }}"

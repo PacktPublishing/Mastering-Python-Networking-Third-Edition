@@ -1,0 +1,28 @@
+---
+- name: Add Multiple Vlans
+  hosts: "nxos-r1"
+  gather_facts: false
+  connection: network_cli
+
+  vars:
+    vlans: {
+        "100": {"description": "floor_1", "ip": "192.168.10.1"},
+        "200": {"description": "floor_2", "ip": "192.168.20.1"},
+        "300": {"description": "floor_3", "ip": "192.168.30.1"}  
+      }
+
+  tasks:
+    - name: add vlans
+      nxos_config:
+        lines:
+          - vlan {{ item.key }}
+      with_dict: "{{ vlans }}"
+
+    - name: configure vlans
+      nxos_config:
+        lines: 
+          - description {{ item.value.description }}
+          - ip address {{ item.value.ip }}/24
+        parents: interface vlan {{ item.key }}
+      with_dict: "{{ vlans }}"
+

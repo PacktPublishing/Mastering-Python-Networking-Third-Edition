@@ -1,0 +1,17 @@
+---
+- name: Add Multiple Vlans
+  hosts: "nxos-r1"
+  gather_facts: false
+  connection: network_cli
+
+  vars:
+    vlan_numbers: [100, 200, 300]
+
+  tasks:
+    - name: add vlans
+      nxos_config:
+        lines:
+            - vlan {{ item }}
+      with_items: "{{ vlan_numbers }}"
+      register: output
+

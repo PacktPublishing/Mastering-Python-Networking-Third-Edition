@@ -1,0 +1,17 @@
+---
+- name: Chapter 5 Ansible 2.8 network facts
+  connection: network_cli
+  gather_facts: false
+  hosts: all
+  tasks:
+    - name: Gathering facts via ios_facts module
+      ios_facts:
+      when: ansible_network_os == 'ios'
+    
+    - name: Display certain facts
+      debug: 
+        msg: "The hostname is {{ ansible_net_hostname }} running {{ ansible_net_version }}"
+
+    - name: Display all facts for a host
+      debug:
+        var: hostvars['iosv-1']

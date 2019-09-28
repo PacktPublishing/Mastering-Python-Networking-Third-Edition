@@ -1,0 +1,19 @@
+---
+- name: EOS Command Output
+  hosts: "arista1"
+  gather_facts: False
+  connection: local
+
+  tasks:
+    - name: "sh int ethernet 1 | json"
+      eos_command:
+        commands:
+            - "show interface ethernet 1 | json"
+        waitfor:
+          - "result[0].interfaces.Ethernet1.interfaceStatus eq disabled"
+
+      register: output
+    - name: show output
+      debug:
+        msg: "Interface Disabled, Safe to Proceed"
+

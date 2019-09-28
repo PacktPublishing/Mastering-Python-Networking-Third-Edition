@@ -1,0 +1,19 @@
+---
+- name: IOS Command Output
+  hosts: "ios-devices"
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: show hostname
+      ios_command:
+        commands:
+            - show run | i hostname
+      
+      register: output
+
+    - name: show output with when conditions
+      when: '"iosv-2" in "{{output.stdout}}"'
+      debug:
+        msg: '{{ output }}'
+
