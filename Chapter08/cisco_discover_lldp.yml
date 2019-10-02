@@ -1,0 +1,22 @@
+---
+- name: Query LLDP Neighbors
+  hosts: "devices"
+  gather_facts: false
+  connection: network_cli
+
+
+  tasks:
+    - name: Query for LLDP Neighbors
+      ios_command:
+        commands: show lldp neighbors
+
+      register: output
+
+    - name: show output
+      debug:
+        var: output
+
+    - name: copy output to file
+      copy: content="{{ output.stdout_lines }}" dest="./tmp/{{ inventory_hostname }}_lldp_output.txt"
+
+

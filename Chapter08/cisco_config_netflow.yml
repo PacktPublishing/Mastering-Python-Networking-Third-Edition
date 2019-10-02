@@ -1,0 +1,56 @@
+---
+- name: Configure NetFlow
+  hosts: "devices"
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: configure netflow export station
+      ios_config:
+        lines: 
+          - ip flow-export destination 172.16.1.123 5556 vrf Mgmt-intf
+          - ip flow-export version 5
+
+    - name: configure flow export on Gi0/0
+      ios_config:
+        lines: 
+          - ip flow ingress
+          - ip flow egress
+        parents: interface GigabitEthernet0/0
+
+    - name: configure flow export on Gi0/1
+      ios_config:
+        lines:
+          - ip flow ingress
+          - ip flow egress
+        parents: interface GigabitEthernet0/1
+
+    - name: configure flow export on Gi0/2
+      ios_config:
+        lines:
+          - ip flow ingress
+          - ip flow egress
+        parents: interface GigabitEthernet0/2
+
+- name: Configure NetFlow on edge-devices
+  hosts: "edge-devices"
+  gather_facts: false
+  connection: network_cli
+
+
+  tasks:
+    - name: configure flow export on Gi0/3
+      ios_config:
+        lines:
+          - ip flow ingress
+          - ip flow egress
+        parents: interface GigabitEthernet0/3
+
+    - name: configure flow export on Gi0/4
+      ios_config:
+        lines:
+          - ip flow ingress
+          - ip flow egress
+        parents: interface GigabitEthernet0/4
+
+
