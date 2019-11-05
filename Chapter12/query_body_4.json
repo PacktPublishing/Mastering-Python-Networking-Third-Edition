@@ -1,0 +1,28 @@
+{
+  "aggs": {
+        "network_bytes_sum": {
+          "sum": {
+            "field": "network.bytes"
+        }
+    }
+  },
+  "query": {
+    "bool": {
+      "must": {
+        "term": {
+          "source.ip": "192.168.0.1"
+        }
+      },
+      "filter": [
+        {
+        "range": {
+          "@timestamp": {
+            "gte": "now-10m"
+          }
+        }
+      }
+      ]
+    }
+  }
+}
+

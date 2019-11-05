@@ -1,0 +1,225 @@
+{
+  "aggs": {
+    "3": {
+      "terms": {
+        "field": "source.ip",
+        "order": {
+          "1": "desc"
+        },
+        "size": 50
+      },
+      "aggs": {
+        "1": {
+          "sum": {
+            "field": "network.bytes"
+          }
+        }
+      }
+    }
+  },
+  "size": 0,
+  "_source": {
+    "excludes": []
+  },
+  "stored_fields": [
+    "*"
+  ],
+  "script_fields": {},
+  "docvalue_fields": [
+    {
+      "field": "@timestamp",
+      "format": "date_time"
+    },
+    {
+      "field": "event.created",
+      "format": "date_time"
+    },
+    {
+      "field": "event.end",
+      "format": "date_time"
+    },
+    {
+      "field": "event.start",
+      "format": "date_time"
+    },
+    {
+      "field": "file.accessed",
+      "format": "date_time"
+    },
+    {
+      "field": "file.created",
+      "format": "date_time"
+    },
+    {
+      "field": "file.ctime",
+      "format": "date_time"
+    },
+    {
+      "field": "file.mtime",
+      "format": "date_time"
+    },
+    {
+      "field": "kafka.block_timestamp",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.collection_time_milliseconds",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.exporter.timestamp",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.flow_end_microseconds",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.flow_end_milliseconds",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.flow_end_nanoseconds",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.flow_end_seconds",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.flow_start_microseconds",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.flow_start_milliseconds",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.flow_start_nanoseconds",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.flow_start_seconds",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.max_export_seconds",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.max_flow_end_microseconds",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.max_flow_end_milliseconds",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.max_flow_end_nanoseconds",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.max_flow_end_seconds",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.min_export_seconds",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.min_flow_start_microseconds",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.min_flow_start_milliseconds",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.min_flow_start_nanoseconds",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.min_flow_start_seconds",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.monitoring_interval_end_milli_seconds",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.monitoring_interval_start_milli_seconds",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.observation_time_microseconds",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.observation_time_milliseconds",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.observation_time_nanoseconds",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.observation_time_seconds",
+      "format": "date_time"
+    },
+    {
+      "field": "netflow.system_init_time_milliseconds",
+      "format": "date_time"
+    },
+    {
+      "field": "process.start",
+      "format": "date_time"
+    },
+    {
+      "field": "suricata.eve.flow.end",
+      "format": "date_time"
+    },
+    {
+      "field": "suricata.eve.flow.start",
+      "format": "date_time"
+    },
+    {
+      "field": "suricata.eve.timestamp",
+      "format": "date_time"
+    },
+    {
+      "field": "suricata.eve.tls.notafter",
+      "format": "date_time"
+    },
+    {
+      "field": "suricata.eve.tls.notbefore",
+      "format": "date_time"
+    }
+  ],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "query": "*",
+            "analyze_wildcard": true,
+            "time_zone": "America/Los_Angeles"
+          }
+        }
+      ],
+      "filter": [
+        {
+          "range": {
+            "@timestamp": {
+              "format": "strict_date_optional_time",
+              "gte": "2019-11-04T03:48:13.218Z",
+              "lte": "2019-11-05T03:48:13.218Z"
+            }
+          }
+        }
+      ],
+      "should": [],
+      "must_not": []
+    }
+  }
+}
+
