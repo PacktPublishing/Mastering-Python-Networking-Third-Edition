@@ -1,0 +1,20 @@
+{
+  "query": {
+    "bool": {
+      "must": {
+        "term": {
+          "source.ip": "192.168.0.1"
+        }
+      },
+      "filter": [
+        {
+        "range": {
+          "@timestamp": {
+            "gte": "now-10m"
+          }
+        }
+      }
+      ]
+    }
+  }
+}

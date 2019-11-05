@@ -1,0 +1,15 @@
+{
+  "query": {
+    "bool": {
+    "filter": [
+      {
+        "range": {
+          "@timestamp": {
+            "gte": "now-10m"
+          }
+        }
+      }
+    ]
+    }
+  }
+}
