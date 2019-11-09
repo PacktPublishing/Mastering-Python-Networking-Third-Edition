@@ -1,0 +1,217 @@
+terminal length 0
+R1#show version
+Cisco IOS Software, IOSv Software (VIOS-ADVENTERPRISEK9-M), Version 15.6(3)M2, RELEASE SOFTWARE (fc2)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2017 by Cisco Systems, Inc.
+Compiled Wed 29-Mar-17 14:05 by prod_rel_team
+
+
+ROM: Bootstrap program is IOSv
+
+R1 uptime is 16 hours, 44 minutes
+System returned to ROM by reload
+System image file is "flash0:/vios-adventerprisek9-m"
+Last reload reason: Unknown reason
+
+
+
+This product contains cryptographic features and is subject to United
+States and local country laws governing import, export, transfer and
+use. Delivery of Cisco cryptographic products does not imply
+third-party authority to import, export, distribute or use encryption.
+Importers, exporters, distributors and users are responsible for
+compliance with U.S. and local country laws. By using this product you
+agree to comply with applicable laws and regulations. If you are unable
+to comply with U.S. and local laws, return this product immediately.
+
+A summary of U.S. laws governing Cisco cryptographic products may be found at:
+http://www.cisco.com/wwl/export/crypto/tool/stqrg.html
+
+If you require further assistance please contact us by sending email to
+export@cisco.com.
+
+Cisco IOSv (revision 1.0) with  with 484609K/37888K bytes of memory.
+Processor board ID 9439U09MB5D8X91KXPMJ4
+2 Gigabit Ethernet interfaces
+DRAM configuration is 72 bits wide with parity disabled.
+256K bytes of non-volatile configuration memory.
+2097152K bytes of ATA System CompactFlash 0 (Read/Write)
+0K bytes of ATA CompactFlash 1 (Read/Write)
+0K bytes of ATA CompactFlash 2 (Read/Write)
+10080K bytes of ATA CompactFlash 3 (Read/Write)
+
+
+
+Configuration register is 0x0
+
+R1#show run
+Building configuration...
+
+  
+Current configuration : 3882 bytes
+!
+! Last configuration change at 18:37:17 UTC Sat Nov 9 2019
+!
+version 15.6
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname R1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+vrf definition Mgmt-intf
+ !
+ address-family ipv4
+ exit-address-family
+ !
+ address-family ipv6
+ exit-address-family
+!
+enable password cisco
+!
+no aaa new-model
+!
+!
+!
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+no ip domain lookup
+ip domain name virl.info
+ip cef
+ipv6 unicast-routing
+ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+username cisco privilege 15 secret 5 $1$ouAl$JXJ.R7VkG4ubxYffpr5/M1
+!
+redundancy
+!
+no cdp run
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ description Loopback
+ ip address 192.168.0.1 255.255.255.255
+!
+interface GigabitEthernet0/0
+ description OOB Management
+ vrf forwarding Mgmt-intf
+ ip address 172.16.1.20 255.255.255.0
+ duplex full
+ speed auto
+ media-type rj45
+!
+interface GigabitEthernet0/1
+ description to R2
+ ip address 10.0.0.5 255.255.255.252
+ ip ospf cost 1
+ duplex full
+ speed auto
+ media-type rj45
+!
+router ospf 1
+ passive-interface Loopback0
+ network 10.0.0.4 0.0.0.3 area 0
+ network 192.168.0.1 0.0.0.0 area 0
+!
+router bgp 1
+ bgp router-id 192.168.0.1
+ bgp log-neighbor-changes
+ neighbor 192.168.0.2 remote-as 1
+ neighbor 192.168.0.2 description iBGP peer R2
+ neighbor 192.168.0.2 update-source Loopback0
+ !
+ address-family ipv4
+  network 192.168.0.1 mask 255.255.255.255
+  neighbor 192.168.0.2 activate
+ exit-address-family
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh server algorithm authentication password
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+!
+ipv6 ioam timestamp
+!
+!
+!
+control-plane
+!
+banner exec ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+banner incoming ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+banner login ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+!
+line con 0
+ password cisco
+line aux 0
+line vty 0 4
+ exec-timeout 720 0
+ password cisco
+ login local
+ transport input telnet ssh
+!
+no scheduler allocate
+!
+end
+
+R1#
