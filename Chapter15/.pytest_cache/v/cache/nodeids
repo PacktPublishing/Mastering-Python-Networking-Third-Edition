@@ -1,0 +1,10 @@
+[
+  "chapter13_7_pytest_2.py::test_defaults",
+  "chapter13_7_pytest_2.py::test_non_defaults",
+  "chapter15_6_pytest_1.py::test_passing",
+  "chapter15_6_pytest_1.py::test_failing",
+  "chapter15_7_pytest_2.py::test_defaults",
+  "chapter15_7_pytest_2.py::test_non_defaults",
+  "chapter15_8_pytest_3.py::test_version",
+  "chapter15_9_pytest_4.py::test_transaction"
+]

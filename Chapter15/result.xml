@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="0" failures="0" hostname="network-dev-2" name="pytest" skipped="0" tests="1" time="0.099" timestamp="2019-11-09T19:28:54.481302"><testcase classname="chapter15_9_pytest_4" file="chapter15_9_pytest_4.py" line="25" name="test_transaction" time="0.001"></testcase></testsuite></testsuites>
