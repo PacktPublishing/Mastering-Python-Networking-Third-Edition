@@ -1,0 +1,33 @@
+testbed: 
+    name: Chapter_15_pyATS
+    tacacs: 
+      username: cisco
+    passwords:
+      tacacs: cisco 
+      enable: cisco
+
+devices:
+   iosv-1: 
+       alias: iosv-1
+       type: ios
+       connections:
+         defaults:
+           class: unicon.Unicon  
+         management:
+           ip: 172.16.1.20
+           protocol: ssh
+
+topology: 
+    iosv-1:
+        interfaces:
+            GigabitEthernet0/2:
+                ipv4: 10.0.0.5/30
+                link: link-1
+                type: ethernet
+            Loopback0:
+                ipv4: 192.168.0.3/32
+                link: iosv-1_Loopback0
+                type: loopback
+
+     
+       
