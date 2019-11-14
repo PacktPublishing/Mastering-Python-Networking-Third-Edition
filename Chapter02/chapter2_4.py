@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 
 import paramiko, getpass, time, json
 
@@ -6,7 +6,7 @@ with open('devices.json', 'r') as f:
     devices = json.load(f)
 
 with open('commands.txt', 'r') as f: 
-    commands = [line for line in f.readlines()]
+    commands = f.readlines()
 
 username = input('Username: ')
 password = getpass.getpass('Password: ')

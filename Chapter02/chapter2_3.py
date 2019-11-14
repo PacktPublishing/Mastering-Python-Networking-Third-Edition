@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 
 import paramiko, getpass, time
 
@@ -23,13 +23,13 @@ for device in devices.keys():
     connection.connect(devices[device]['ip'], username=username, password=password, look_for_keys=False, allow_agent=False)
     new_connection = connection.invoke_shell()
     output = clear_buffer(new_connection)
-    time.sleep(2)
+    time.sleep(5)
     new_connection.send("terminal length 0\n")
     output = clear_buffer(new_connection)
     with open(outputFileName, 'wb') as f:
         for command in commands:
             new_connection.send(command)
-            time.sleep(2)
+            time.sleep(5)
             output = new_connection.recv(max_buffer)
             print(output)
             f.write(output)
