@@ -129,7 +129,7 @@ def before_request():
 # from HTTPAuath extension
 @auth.error_handler
 def unathorized():
-    response = jsonify({'status': 401, 'error': 'unahtorized', 
+    response = jsonify({'status': 401, 'error': 'unauthorized', 
                         'message': 'please authenticate'})
     response.status_code = 401
     return response
