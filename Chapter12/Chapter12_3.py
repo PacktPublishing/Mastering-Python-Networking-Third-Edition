@@ -6,7 +6,7 @@ import json
 import logging
 
 # parse options
-parser = argparse.ArgumentParser(description='Elsticsearch Query Options')
+parser = argparse.ArgumentParser(description='Elasticsearch Query Options')
 parser.add_argument("-i", "--index", help="index to query")
 parser.add_argument("-q", "--query", help="query file")
 
