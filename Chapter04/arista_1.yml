@@ -1,6 +1,6 @@
 ---
 - name: EOS Show Commands
-  hosts: "eos_devices"
+  hosts: "eos-devices"
   gather_facts: false
   connection: local
 
