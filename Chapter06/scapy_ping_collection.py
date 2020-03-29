@@ -31,3 +31,6 @@ def main():
     ans = udp_ping("10.0.0.13-14")
     answer_summary(ans)
 
+
+if __name__ == "__main__":
+    main()

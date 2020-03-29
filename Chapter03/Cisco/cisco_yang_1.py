@@ -4,8 +4,8 @@ from ncclient import manager
 import xml.dom.minidom
 
 host = "ios-xe-mgmt.cisco.com"
-username = "root"
-password = "C!sc0123"
+username = "developer"
+password = "C1sco12345"
 port = 10000
 
 yang_file = "cisco_yang_1_interfaces.xml"
