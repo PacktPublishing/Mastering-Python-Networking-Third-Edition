@@ -8,7 +8,7 @@ pattern = re.compile('Gi0/[1234]')
 device_lldp_neighbors = []
 
 # walk thru files in ./tmp directory
-for file_name in glob.glob('tmp-2/*'):
+for file_name in glob.glob('tmp/*'):
     # device name
     device = file_name.split('/')[1].split('_')[0]
     print("device: " + device)
