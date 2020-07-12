@@ -46,7 +46,7 @@ result['Gig0-0_In_uPackets'] = snmp_query(host, community, gig0_0_in_uPackets)
 result['Gig0-0_Out_Octet'] = snmp_query(host, community, gig0_0_out_oct)
 result['Gig0-0_Out_uPackets'] = snmp_query(host, community, gig0_0_out_uPackets)
 
-with open('/home/echou/Master_Python_Networking/Chapter7/results.txt', 'a') as f:
+with open('/home/echou/Master_Python_Networking/Chapter07/results.txt', 'a') as f:
     f.write(str(result))
     f.write('\n')
 
