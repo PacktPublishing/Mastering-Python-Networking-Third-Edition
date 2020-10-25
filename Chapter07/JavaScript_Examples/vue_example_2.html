@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Hello Vue!</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['Protocol', 'Value'],
+                ['TCP', 15],
+                ['UDP', 30],
+                ['ICMP', 45],
+                ['Others', 10],
+            ]);
+
+            var options = {
+                title: 'Network Protocols',
+                pieStartAngle: 180,
+                width: 900,
+                height: 500,
+                pieSliceText: 'label',
+                slices: {
+                    1: { offset: 0.1 },
+                },
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+        }
+    </script>
+    <script type="text/javascript">
+        google.charts.load("current", { packages: ["corechart"] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ["Protocol", "Value", { role: "style" }],
+                ["TCP", 15, "#b87333"],
+                ["UDP", 30, "silver"],
+                ["ICMP", 45, "gold"],
+                ["Others", 10, "color: #e5e4e2"]
+            ]);
+
+            var view = new google.visualization.DataView(data);
+            view.setColumns([0, 1,
+                {
+                    calc: "stringify",
+                    sourceColumn: 1,
+                    type: "string",
+                    role: "annotation"
+                },
+                2]);
+
+            var options = {
+                title: "Network Protocols",
+                width: 600,
+                height: 400,
+                bar: { groupWidth: "95%" },
+                legend: { position: "none" },
+            };
+            var chart = new google.visualization.BarChart(document.getElementById("barchart"));
+            chart.draw(view, options);
+        }
+    </script>
+</head>
+
+<body>
+
+    <div id="app">
+        <h2>[[ title ]]</h2>
+        <button type="button" v-on:click="setPieChart">Pie Chart!</button>
+        <button type="button" v-on:click="setBarChart">Bar Chart!</button>
+        <button type="button" v-on:click="clearCharts">Clear</button>
+        <div id="piechart" style="display:none"></div>
+        <div id="barchart" style="display:none"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- Vue Script -->
+    <script>
+        var app = new Vue({
+            delimiters: ['[[', ']]'],
+            el: '#app',
+            data: {
+                title: 'Choose Your Chart',
+            },
+            methods: {
+                setPieChart: function () {
+                    document.getElementById('piechart').style = "width: 900px; height: 500px;";
+                    document.getElementById('barchart').style.display = "none"
+                },
+                setBarChart: function () {
+                    document.getElementById('barchart').style = "width: 900px; height: 300px; ";
+                    document.getElementById('piechart').style.display = "none";
+                },
+                clearCharts: function () {
+                    document.getElementById('piechart').style.display = "none";
+                    document.getElementById('barchart').style.display = "none";
+                },
+            },
+        });
+    </script>
+</body>
+
+</html>
+
+
